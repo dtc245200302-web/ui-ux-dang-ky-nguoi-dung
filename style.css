@@ -1,0 +1,329 @@
+/* =========================================================
+   UI/UX Registration Page
+   Responsive: mobile, tablet, desktop
+   ========================================================= */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --text: #172033;
+    --muted: #667085;
+    --border: #d9dee8;
+    --background: #f4f7fb;
+    --white: #ffffff;
+    --error: #d92d20;
+    --success: #12b76a;
+    --focus: rgba(37, 99, 235, 0.16);
+    --shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.10), transparent 35%),
+        var(--background);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
+.auth-card {
+    width: min(100%, 460px);
+    padding: 36px;
+    background: var(--white);
+    border: 1px solid rgba(217, 222, 232, 0.85);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.brand-icon {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--white);
+    background: var(--primary);
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.heading h1 {
+    margin: 0 0 8px;
+    font-size: clamp(26px, 5vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.heading p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.register-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-group {
+    display: grid;
+    gap: 7px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.required {
+    color: var(--error);
+}
+
+.form-group input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #98a2b3;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--focus);
+}
+
+.form-group input.invalid {
+    border-color: var(--error);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 72px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    min-width: 52px;
+    min-height: 36px;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 8px;
+    color: var(--primary);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+    background: #eff6ff;
+    outline: none;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.error-message {
+    min-height: 16px;
+    color: var(--error);
+    font-size: 12px;
+}
+
+.primary-button {
+    width: 100%;
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 10px;
+    color: var(--white);
+    background: var(--primary);
+    cursor: pointer;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.primary-button:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+.primary-button:active {
+    transform: translateY(1px);
+}
+
+.primary-button:focus-visible,
+.login-link a:focus-visible,
+.back-link:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.28);
+    outline-offset: 3px;
+}
+
+.login-link {
+    margin: 22px 0 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.login-link a,
+.back-link {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-link a:hover,
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.required-note {
+    margin: 18px 0 0;
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+}
+
+/* Success page */
+
+.success-card {
+    text-align: center;
+}
+
+.success-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--white);
+    background: var(--success);
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.success-message {
+    margin: 0 0 24px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #f0fdf4;
+}
+
+.success-message p {
+    margin: 0;
+    color: #344054;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.button-link {
+    margin-bottom: 18px;
+}
+
+.back-link {
+    display: inline-block;
+    font-size: 14px;
+}
+
+/* Tablet */
+
+@media (max-width: 600px) {
+    .page {
+        padding: 20px 12px;
+    }
+
+    .auth-card {
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 380px) {
+    .auth-card {
+        padding: 24px 16px;
+    }
+
+    .heading {
+        margin-bottom: 22px;
+    }
+
+    .heading h1 {
+        font-size: 25px;
+    }
+
+    .register-form {
+        gap: 15px;
+    }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}

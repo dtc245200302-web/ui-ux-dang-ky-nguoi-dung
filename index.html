@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang đăng ký người dùng - Bài tập thiết kế UI/UX">
+    <title>Đăng ký tài khoản</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page">
+        <section class="auth-card" aria-labelledby="register-title">
+            <div class="brand" aria-hidden="true">
+                <span class="brand-icon">U</span>
+            </div>
+
+            <div class="heading">
+                <h1 id="register-title">Tạo tài khoản</h1>
+                <p>Đăng ký để bắt đầu sử dụng hệ thống</p>
+            </div>
+
+            <form id="registerForm" class="register-form" novalidate>
+                <div class="form-group">
+                    <label for="fullName">Họ và tên <span class="required">*</span></label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Nguyễn Văn A"
+                        autocomplete="name"
+                        required
+                        minlength="2"
+                    >
+                    <small class="error-message" id="fullNameError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        autocomplete="email"
+                        required
+                    >
+                    <small class="error-message" id="emailError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Tối thiểu 8 ký tự"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+                        <button class="password-toggle" type="button" data-target="password" aria-label="Hiện mật khẩu">Hiện</button>
+                    </div>
+                    <small class="hint">Mật khẩu nên có ít nhất 8 ký tự.</small>
+                    <small class="error-message" id="passwordError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Xác nhận mật khẩu <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Nhập lại mật khẩu"
+                            autocomplete="new-password"
+                            required
+                        >
+                        <button class="password-toggle" type="button" data-target="confirmPassword" aria-label="Hiện mật khẩu">Hiện</button>
+                    </div>
+                    <small class="error-message" id="confirmPasswordError"></small>
+                </div>
+
+                <button class="primary-button" type="submit">Đăng ký</button>
+            </form>
+
+            <p class="login-link">
+                Đã có tài khoản?
+                <a href="#" aria-label="Đăng nhập">Đăng nhập</a>
+            </p>
+
+            <p class="required-note"><span class="required">*</span> Trường bắt buộc</p>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("registerForm");
+
+        const fields = {
+            fullName: document.getElementById("fullName"),
+            email: document.getElementById("email"),
+            password: document.getElementById("password"),
+            confirmPassword: document.getElementById("confirmPassword")
+        };
+
+        function showError(fieldName, message) {
+            const field = fields[fieldName];
+            const error = document.getElementById(fieldName + "Error");
+            field.classList.add("invalid");
+            field.setAttribute("aria-invalid", "true");
+            error.textContent = message;
+        }
+
+        function clearError(fieldName) {
+            const field = fields[fieldName];
+            const error = document.getElementById(fieldName + "Error");
+            field.classList.remove("invalid");
+            field.removeAttribute("aria-invalid");
+            error.textContent = "";
+        }
+
+        function validate() {
+            let valid = true;
+
+            Object.keys(fields).forEach(clearError);
+
+            if (fields.fullName.value.trim().length < 2) {
+                showError("fullName", "Vui lòng nhập họ và tên.");
+                valid = false;
+            }
+
+            if (!fields.email.validity.valid) {
+                showError("email", "Vui lòng nhập email hợp lệ.");
+                valid = false;
+            }
+
+            if (fields.password.value.length < 8) {
+                showError("password", "Mật khẩu phải có ít nhất 8 ký tự.");
+                valid = false;
+            }
+
+            if (fields.confirmPassword.value !== fields.password.value) {
+                showError("confirmPassword", "Mật khẩu xác nhận chưa khớp.");
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (validate()) {
+                window.location.href = "success.html";
+            }
+        });
+
+        Object.values(fields).forEach((field) => {
+            field.addEventListener("input", () => {
+                if (field.value.trim() !== "") {
+                    clearError(field.id);
+                }
+            });
+        });
+
+        document.querySelectorAll(".password-toggle").forEach((button) => {
+            button.addEventListener("click", () => {
+                const input = document.getElementById(button.dataset.target);
+                const isPassword = input.type === "password";
+                input.type = isPassword ? "text" : "password";
+                button.textContent = isPassword ? "Ẩn" : "Hiện";
+                button.setAttribute("aria-label", isPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu");
+            });
+        });
+    </script>
+</body>
+</html>
